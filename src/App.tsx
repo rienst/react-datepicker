@@ -17,6 +17,7 @@ const App: React.FC = () => {
         selected={date}
         onChange={date => setDate(date)}
         locale={nl}
+        weekStartsOn={1}
       />
     </div>
   )
