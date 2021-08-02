@@ -12,3 +12,11 @@ const App = () => {
   return <DatePicker initialDate={date} onChange={date => setDate(date)} />
 }
 ```
+
+## Configuration
+
+| Prop           | Required | Default | Description                                                                                     |
+| -------------- | -------- | ------- | ----------------------------------------------------------------------------------------------- |
+| `initialDate`  | &check;  |         | The date that should be selected when the datepicker is first rendered.                                                     |
+| `onChange`     | &check;  |         | A callback function that will fire once a new date has been selected.                           |
+| `weekStartsOn` |          | `1`     | The day used as the first day of the week. `0` is sunday, `1` is monday, etc. |
