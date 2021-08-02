@@ -11,22 +11,22 @@ import {
   startOfMonth,
   endOfMonth,
 } from 'date-fns'
-import { nl } from 'date-fns/locale'
 import './DatePicker.scss'
 
 type Props = {
-  initialDate: Date | undefined
+  selected: Date
   onChange: (date: Date) => any
+  locale?: Locale
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6
 }
 
 const DatePicker: React.FC<Props> = ({
-  initialDate,
-  weekStartsOn = 1,
+  selected,
   onChange,
+  locale,
+  weekStartsOn = 1,
 }) => {
-  const [date, setDate] = React.useState(initialDate || new Date())
-  const [viewingDate, setViewingDate] = React.useState(date)
+  const [viewingDate, setViewingDate] = React.useState(selected)
 
   const firstDayOfFirstWeek = startOfWeek(startOfMonth(viewingDate), {
     weekStartsOn,
@@ -53,8 +53,6 @@ const DatePicker: React.FC<Props> = ({
   }
 
   const handleChangeDate = (date: Date) => {
-    setDate(() => date)
-
     onChange(date)
   }
 
@@ -77,7 +75,7 @@ const DatePicker: React.FC<Props> = ({
           </svg>
         </button>
         <div className="date-picker-header-title">
-          {format(viewingDate, 'MMMM yyyy', { locale: nl })}
+          {format(viewingDate, 'MMMM yyyy', { locale })}
         </div>
         <button
           className="date-picker-btn date-picker-header-btn"
@@ -102,16 +100,15 @@ const DatePicker: React.FC<Props> = ({
             key={day.toString()}
             className="date-picker-item date-picker-item-weekday"
           >
-            {format(day, 'EEEEEE', { locale: nl })}
+            {format(day, 'EEEEEE', { locale })}
           </div>
         ))}
         {daysInWeeksOfMonth.map(day => {
           const classes: string[] = ['date-picker-item', 'date-picker-btn']
 
-          if (date && isSameDay(day, date))
-            classes.push('date-picker-item-current')
+          if (isSameDay(day, selected)) classes.push('date-picker-item-current')
 
-          if (date && getMonth(day) !== getMonth(viewingDate))
+          if (getMonth(day) !== getMonth(viewingDate))
             classes.push('date-picker-item-outside-month')
 
           return (
@@ -120,7 +117,7 @@ const DatePicker: React.FC<Props> = ({
               className={classes.join(' ')}
               onClick={() => handleChangeDate(day)}
             >
-              {format(day, 'd', { locale: nl })}
+              {format(day, 'd', { locale })}
             </button>
           )
         })}
