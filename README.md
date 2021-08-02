@@ -25,6 +25,7 @@ const App = () => {
 
 | Prop           | Required | Type                              | Default | Description                                                                   |
 | -------------- | -------- | --------------------------------- | ------- | ----------------------------------------------------------------------------- |
-| `selected`     | &check;  | `Date`                            |         | The date that should be selected when the datepicker is first rendered.       |
+| `selected`     | &check;  | `Date`                            |         | The selected date.                                                            |
 | `onChange`     | &check;  | `(date: Date) => any`             |         | A callback function that will fire once a new date has been selected.         |
+| `locale`       |          | `Locale`                          |         | The locale used for formatting.                                               |
 | `weekStartsOn` |          | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `1`     | The day used as the first day of the week. `0` is sunday, `1` is monday, etc. |
